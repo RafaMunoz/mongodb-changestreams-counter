@@ -1,0 +1,13 @@
+version: '3.9'
+services:
+  changestreamsstats-coltest:
+    image: rafa93m/mongodb-changestreams-counter:latest
+    environment:
+      URI_MONGODB_SRC: "mongodb+srv://user-1:password-1@cluster0.000z.mongodb.net/dbtest?retryWrites=true&w=majority"
+      URI_MONGODB_DST: "mongodb+srv://user-2:password-2@cluster0.001z.mongodb.net/dbcount?retryWrites=true&w=majority"
+      COLLECTION_SRC: "collection_test_1"
+      COLLECTION_DST: "changestream_counter_1"
+      COMMIT_SECONDS: 15
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
